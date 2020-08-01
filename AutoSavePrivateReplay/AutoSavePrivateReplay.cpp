@@ -22,12 +22,9 @@ void AutoSavePrivateReplay::enable(bool enabled) {
             "Function GameEvent_Soccar_TA.Active.StartRound",
             std::bind(&AutoSavePrivateReplay::startGame, this));
         cvarManager->log("hooked events");
-    }
-    else {
-        gameWrapper->UnhookEventPost(
-            "Function GameEvent_Soccar_TA.WaitingForPlayers.BeginState");
-        gameWrapper->UnhookEventPost(
-            "Function Engine.PlayerInput.InitInputSystem");
+    } else {
+        gameWrapper->UnhookEvent(
+            "Function GameEvent_Soccar_TA.Active.StartRound");
     }
 }
 
