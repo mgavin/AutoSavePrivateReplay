@@ -11,5 +11,8 @@ class AutoSavePrivateReplay: public BakkesMod::Plugin::BakkesModPlugin
 	//Boilerplate
 	virtual void onLoad();
 	virtual void onUnload();
+
+	void enable(bool enabled);
+	void startGame();
 };
 
