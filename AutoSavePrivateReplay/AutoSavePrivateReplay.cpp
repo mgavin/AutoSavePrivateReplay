@@ -18,12 +18,12 @@ void AutoSavePrivateReplay::onLoad()
 void AutoSavePrivateReplay::enable(bool enabled) {
    if (enabled) {
         // hooks on a starting game 
-        gameWrapper->HookEvent(
+        gameWrapper->HookEventPost(
             "Function GameEvent_Soccar_TA.Active.StartRound",
             std::bind(&AutoSavePrivateReplay::startGame, this));
         cvarManager->log("hooked events");
     } else {
-        gameWrapper->UnhookEvent(
+        gameWrapper->UnhookEventPost(
             "Function GameEvent_Soccar_TA.Active.StartRound");
     }
 }
