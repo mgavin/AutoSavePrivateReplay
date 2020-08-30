@@ -3,7 +3,7 @@
 #include "bakkesmod/plugin/bakkesmodplugin.h"
 #include "bakkesmod/plugin/pluginwindow.h"
 
-constexpr auto plugin_version = "1.0";
+constexpr auto plugin_version = "2.0";
 
 class AutoSavePrivateReplay: public BakkesMod::Plugin::BakkesModPlugin
 {
