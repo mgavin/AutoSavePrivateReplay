@@ -14,5 +14,6 @@ class AutoSavePrivateReplay: public BakkesMod::Plugin::BakkesModPlugin
 
 	void enable(bool enabled);
 	void startGame();
+	void enablePlaylist(int playlistID, bool enabled);
 };
 
