@@ -12,7 +12,6 @@ Playlist Replay Saving
 9|Ranked
 1|Ranked Duel|ranked_autosavereplay_rankedduel
 1|Ranked Doubles|ranked_autosavereplay_rankeddoubles
-1|Ranked Solo Standard|ranked_autosavereplay_rankedsolostandard
 1|Ranked Standard|ranked_autosavereplay_rankedstandard
 8|
 9|Extra Modes
@@ -23,9 +22,8 @@ Playlist Replay Saving
 8|
 9|Others
 1|Private Match|ranked_autosavereplay_privatematch
-1|Training|ranked_autosavereplay_training
-1|Tournament|ranked_autosavereplay_tournament
-1|Workshop|ranked_autosavereplay_workshop
+1|Psyonix Official Tournament|ranked_autosavereplay_tournament
+1|Custom Tournament|ranked_autosavereplay_customtournament
 1|Offline Season|ranked_autosavereplay_offlineseason
 1|Offline Splitscreen|ranked_autosavereplay_offlinesplitscreen
 8|

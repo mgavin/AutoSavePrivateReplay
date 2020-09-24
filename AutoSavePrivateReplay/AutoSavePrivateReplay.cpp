@@ -8,49 +8,7 @@ BAKKESMOD_PLUGIN(AutoSavePrivateReplay, "Automatically saves replays of selected
 
 bool pluginEnabled = false;
 
-std::map<int, bool> enabledPlaylists = {
-    {1, false},
-    {2, false},
-    {3, false},
-    {4, false},
-    {5, false},
-    {6, false},
-    {7, false},
-    {8, false},
-    {9, false},
-    {10, false},
-    {11, false},
-    {12, false},
-    {13, false},
-    {14, false},
-    {15, false},
-    {16, false},
-    {17, false},
-    {18, false},
-    {19, false},
-    {20, false},
-    {21, false},
-    {22, false},
-    {23, false},
-    {24, false},
-    {25, false},
-    {26, false},
-    {27, false},
-    {28, false},
-    {29, false},
-    {30, false},
-    {31, false},
-    {32, false},
-    {33, false},
-    {34, false},
-    {35, false},
-    {36, false},
-    {37, false},
-    {38, false},
-    {40, false},
-    {41, false},
-    {43, false}
-};
+std::map<int, bool> enabledPlaylists;
 
 const std::map<int, std::string> playlistStrings = {
     {1, "duel"},
@@ -73,7 +31,7 @@ const std::map<int, std::string> playlistStrings = {
     {19, "workshop"},
     {20, "trainingeditor"},
     {21, "customtraining"},
-    {22, "tournament"},
+    {22, "customtournament"},
     {23, "dropshot"},
     {27, "rankedhoops"},
     {28, "rankedrumble"},
@@ -82,6 +40,7 @@ const std::map<int, std::string> playlistStrings = {
     {31, "hauntedball"},
     {32, "beachball"},
     {33, "rugby"},
+    {34, "tournament"},
     {37, "rumshot"},
     {38, "godball"},
     {41, "boomerball"},
@@ -110,7 +69,7 @@ enum Playlist
     WORKSHOP = 19,
     TRAININGEDITOR = 20,
     CUSTOMTRAINING = 21,
-    TOURNAMENT = 22,
+    OLDTOURNAMENT = 22,
     DROPSHOT = 23,
     RANKEDHOOPS = 27,
     RANKEDRUMBLE = 28,
@@ -119,6 +78,7 @@ enum Playlist
     HAUNTEDBALL = 31,
     BEACHBALL = 32,
     RUGBY = 33,
+    TOURNAMENT = 34,
     RUMSHOT = 37,
     GODBALL = 38,
     BOOMERBALL = 41,
@@ -139,6 +99,10 @@ void AutoSavePrivateReplay::onLoad()
         enableVar.addOnValueChanged([this, playlistPair](std::string, CVarWrapper cvar) {
             enablePlaylist(playlistPair.first, cvar.getBoolValue());
             });
+    }
+
+    for (auto playlistPair : playlistStrings) {
+        enabledPlaylists.emplace(playlistPair.first, false);
     }
 }
 
@@ -168,26 +132,9 @@ void AutoSavePrivateReplay::enable(bool enabled) {
 }
 
 void AutoSavePrivateReplay::startGame() {
-    if (!gameWrapper->IsInOnlineGame()) {
-        cvarManager->log("not in online game"); 
-        return;
-    }
+    auto playlistID = getPlaylistID();
 
-    auto game = gameWrapper->GetOnlineGame();
-
-    if (game.IsNull()) {
-        cvarManager->log("null game");
-        return;
-    }
-
-    auto playlist = game.GetPlaylist();
-
-    if (playlist.memory_address == NULL) {
-        cvarManager->log("null playlist");
-        return;
-    }
-
-    auto playlistID = playlist.GetPlaylistId();
+    if (playlistID == -1) return;
 
     cvarManager->log(std::to_string(playlistID));
 
@@ -208,6 +155,45 @@ void AutoSavePrivateReplay::startGame() {
     } else {
         cvarManager->executeCommand("ranked_autosavereplay_all 0");
     }
+}
+
+int AutoSavePrivateReplay::getPlaylistID() {
+    if (gameWrapper->IsInOnlineGame()) {
+        auto game = gameWrapper->GetOnlineGame();
+
+        if (game.IsNull()) {
+            cvarManager->log("null game");
+            return -1;
+        }
+
+        auto playlist = game.GetPlaylist();
+
+        if (playlist.memory_address == NULL) {
+            cvarManager->log("null playlist");
+            return -1;
+        }
+
+        return playlist.GetPlaylistId();
+    } else if (gameWrapper->IsInGame()) {
+        auto game = gameWrapper->GetGameEventAsServer();
+
+        if (game.IsNull()) {
+            cvarManager->log("null game");
+            return -1;
+        }
+
+        auto playlist = game.GetPlaylist();
+
+        if (playlist.memory_address == NULL) {
+            cvarManager->log("null playlist");
+            return -1;
+        }
+
+        return playlist.GetPlaylistId();
+    }
+
+    cvarManager->log("Not in a game");
+    return -1;
 }
 
 void AutoSavePrivateReplay::onUnload()
