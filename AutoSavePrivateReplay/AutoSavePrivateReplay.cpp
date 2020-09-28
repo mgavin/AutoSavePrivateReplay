@@ -143,6 +143,7 @@ void AutoSavePrivateReplay::startGame() {
     bool enabledPlaylist;
 
     if (enabledPtr != enabledPlaylists.end()) {
+        cvarManager->log("enabled playlist: " + std::to_string(playlistID));
         enabledPlaylist = enabledPtr->second;
     }
     else {
@@ -196,6 +197,6 @@ int AutoSavePrivateReplay::getPlaylistID() {
     return -1;
 }
 
-void AutoSavePrivateReplay::onUnload()
-{
+void AutoSavePrivateReplay::onUnload() {
+    cvarManager->executeCommand("ranked_autosavereplay_all 0");
 }
