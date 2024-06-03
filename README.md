@@ -1,5 +1,12 @@
-# AutoSavePrivateReplay
+# FORKED FROM [AutoSavePrivateReplay](https://github.com/ubelhj/AutoSavePrivateReplay) BUT NEEDS ***UPDATING***
 
+
+---
+fuck. projects in visual studio take so much effort to rename everything.
+
+This project needs updating after four years. Sorry "JERRY THE BEE"
+
+---
 Automatically saves replays from selected playlists
 
 Enable by pressing f2 to open your bakkesmod plugins and selecting each of your preferred playlists. Useful for ranked leagues where you need to provide replay proof of games or just to save all of your hardcore chaos matches for replay analysis. 

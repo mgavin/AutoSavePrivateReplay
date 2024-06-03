@@ -15,24 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AutoSavePrivateReplay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="ReplayAutosave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AutoSavePrivateReplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="ReplayAutosave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\plugins\settings\AutoSavePrivateReplay.set">
+    <None Include="..\plugins\settings\ReplayAutosave.set">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>
