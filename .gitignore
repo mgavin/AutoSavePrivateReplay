@@ -2,3 +2,7 @@
 plugins/
 build/
 plugins.zip
+compile_commands.json
+.cache/
+*.zip
+*.png
