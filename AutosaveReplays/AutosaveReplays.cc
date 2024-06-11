@@ -178,7 +178,7 @@ void AutosaveReplays::SetImGuiContext(uintptr_t ctx) {
 }
 
 std::string AutosaveReplays::GetPluginName() {
-        return "AutosaveReplays";
+        return "Autosave Replays";
 }
 
 void AutosaveReplays::RenderSettings() {
