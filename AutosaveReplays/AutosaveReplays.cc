@@ -61,6 +61,7 @@ void AutosaveReplays::init_cvars() {
                         false)));
 
             cvs->at(playlistPair.first).addOnValueChanged([this, playlistPair](std::string, CVarWrapper cvar) {
+                  cvs->at(playlistPair.first)         = cvar;
                   enabledPlaylist[playlistPair.first] = cvar.getBoolValue();
             });
       }
@@ -209,8 +210,6 @@ void AutosaveReplays::RenderSettings() {
                   if (line < bm_helper::playlist_categories[category].size()) {
                         PlaylistId playid = bm_helper::playlist_categories[category][line];
                         if (!no_replay_playlists.contains(playid)) {
-                              // this confusion as to why the following line crashes is unreal.
-                              // bool b = cvs->at(playid).getBoolValue();
                               bool b = enabledPlaylist[playid];
                               if (ImGui::Selectable(
                                         std::vformat(
