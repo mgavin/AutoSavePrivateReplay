@@ -10,8 +10,8 @@
 #include <stringapiset.h>
 #include <winnls.h>
 
-#include "bakkesmod/imgui/imgui.h"
-#include "bakkesmod/imgui/imgui_internal.h"
+#include "imgui.h"
+#include "imgui_internal.h"
 
 #include "bm_helper.h"
 #include "HookedEvents.h"
@@ -210,19 +210,17 @@ void AutosaveReplays::RenderSettings() {
                   if (line < bm_helper::playlist_categories[category].size()) {
                         PlaylistId playid = bm_helper::playlist_categories[category][line];
                         if (!no_replay_playlists.contains(playid)) {
-                              bool b = enabledPlaylist[playid];
                               if (ImGui::Selectable(
-                                        std::vformat(
+                                        std::format(
                                               "[{:c}] {}",
-                                              std::make_format_args(
-                                                    b ? 'X' : ' ',
-                                                    bm_helper::playlist_ids_str_spaced[playid]))
+                                              enabledPlaylist[playid] ? 'X' : ' ',
+                                              bm_helper::playlist_ids_str_spaced[playid])
                                               .c_str(),
                                         &enabledPlaylist[playid])) {
                                     cvs->at(playid).setValue(enabledPlaylist[playid]);
                               }
                         }
-                  };
+                  }
                   ImGui::NextColumn();
             }
       }
